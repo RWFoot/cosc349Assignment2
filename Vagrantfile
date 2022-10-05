@@ -11,6 +11,9 @@ class Hash
   end unless Hash.method_defined?(:except)
 end
 
+
+
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -26,9 +29,9 @@ Vagrant.configure("2") do |config|
     # parameters from environment variables (more secure than
     # committing security credentials to your Vagrantfile).
     #
-    # aws.access_key_id = "ASIAUYKSVDIVVTNFHDN4"
-    # aws.secret_access_key = "GPdgAcFSpVMLm/Liesb+m9DdM7qEJ1Ia8T0dFYK2"
-    # aws.session_token = "FwoGZXIvYXdzENb//////////wEaDIOPnouvMY98LX28OSK6AQBMHxG5Ncgfxj8tRXVqOPWZrLXn1Qebxs6zqQsnDuAKgDnOm0Z5DYSTwznI+k+j/gZ8YR9ttsK3Rd9Xr9c3UkcktpwYnIM4nkXgC4ylgpprNWQ7+4I3STsw4nAVnLrm/G6BUWaala61px0FvgBPKUA65V9zrHz7gW+Dtn4TgwqfeS+kLiWWN1Tx3DVgPXJvSuYQ0UQDZzHQH4Ag+iZ0Sqdk3bmjtB0R9MBZ6nbc6YRQIesrMLrERtsa8yir0uKZBjItQvdu3fdR4c82U1TNe/6w5PZS1h+4U2EMR7mShPAHWL22SfRmwusqCDdz9HNR"
+    # aws.access_key_id = "ASIAUYKSVDIVYSVYCXP6"
+    # aws.secret_access_key = "N3rVbACsuEtBdRgfggdK8c5mpdiq7I6mPbYNNTlo"
+    # aws.session_token = "FwoGZXIvYXdzEAkaDCHtPBCLDQDmiF7i4iK6AcNq1XI6EOrrIuiz7zyOXjFWmeBeYhstyEisKaiql2v531crnNiDxaxw3gHQ0ldWgHuzUP5hJeMrep7X/S5zz5HsSTDY/Za466k2u1uuRtwy13oXoUT07qNEGkEOIEsSfwizFKNjkOPuygdizCxDy9gt8XxnHe/6m1a8WK2D1hUwjY3NbCQe9mlMyQvuJEdbAXqc8s19bnJCpW8wwdr4eIfkWOsS7H77Aox2+K1j57+E0YU/rsaJ96YO+Cjo2e2ZBjIt7mFVJb63CwI3w0MTpExW+nNcqAlHtn26urLFCm1DHzAK7LunkIcf31CwnEWh"
 
     # The region for Amazon Educate is fixed.
     aws.region = "us-east-1"
@@ -45,13 +48,13 @@ Vagrant.configure("2") do |config|
     # :aws configuration section.
 
     # The keypair_name parameter tells Amazon which public key to use.
-    aws.keypair_name = "cosc349keypair-2022"
+    aws.keypair_name = "cosc349assignment-2022"
     # The private_key_path is a file location in your macOS account
     # (e.g., ~/.ssh/something).
     # For Windows users, just point to the path where you have downloaded the keypair
-    # (e.g., C:\\Users\\<username>\\foo.pem). (Use double "\\" for folder path)
-    override.ssh.private_key_path = "cosc349keypair-2022.ppk"
-    #D:Study/2022/Semester2/cosc349/lab/lab09-vagrant-aws-master/lab09-vagrant-aws-master/
+    # (e.g., C:\\Users\\<username>\\foo.ppk). (Use double "\\" for folder path)
+    override.ssh.private_key_path = "cosc349assignment-2022.pem"
+    #~:\\D:Study\\2022\\Semester2\\cosc349\\lab\\lab09-vagrant-aws-master\\lab09-vagrant-aws-master\\
     
     # Choose your Amazon EC2 instance type (t2.micro is cheap).
     aws.instance_type = "t2.micro"
@@ -61,7 +64,7 @@ Vagrant.configure("2") do |config|
     # they should be comma-separated (if you use more than one) within
     # square brackets.
     #
-    aws.security_groups = ["sg-0f449fb59f8088eb9"]#, "sg-0a87ed778495aa4eb"]
+    aws.security_groups = ["sg-0f449fb59f8088eb9", "sg-0a87ed778495aa4eb"]
 
     # For Vagrant to deploy to EC2 for Amazon Educate accounts, it
     # seems that a specific availability_zone needs to be selected
@@ -89,24 +92,18 @@ Vagrant.configure("2") do |config|
     override.ssh.username = "ubuntu"
   end
 
+  config.vm.define "fwebserver" do |fwebserver|
 
-# My servers will run Ubuntu software as I have been using it in the labs so far.
-  #config.vm.box = "ubuntu/xenial64"
-# This sets up a VM for hosting my front end web server.
-#config.vm.define "fwebserver" do |fwebserver|
-  # The name of my web server. 
-    #fwebserver.vm.hostname = "fwebserver"
-     # fwebserver.vm.provision "shell", path: "build-webserver-vm.sh"
-      #End of fwebserver configuration.
-  #end
+    fwebserver.vm.hostname = "fwebserver"
+    fwebserver.vm.provision "shell", path: "build-webserver-vm.sh"
 
-
-#  config.vm.define "dbserver" do |dbserver|
-    # The name of my web server. 
- #     fwebserver.vm.hostname = "dbserver"
-  #      fwebserver.vm.provision "shell", path: "build-adminserver-vm.sh"
-        #End of fwebserver configuration.
-   # end
+  end
+  
+  
+  config.vm.define "dbserver" do |dbserver|
+    dbserver.vm.hostname = "dbserver"
+    dbserver.vm.provision "shell", path: "build-adminserver-vm.sh"
+  end
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
@@ -116,3 +113,6 @@ Vagrant.configure("2") do |config|
      apt-get install -y apache2
    SHELL
 end
+
+
+#http://ec2-3-83-234-238.compute-1.amazonaws.com/

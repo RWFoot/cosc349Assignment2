@@ -15,7 +15,7 @@
 <tr><th>Code</th><th>Name</th></tr>
 <?php 
 
-$db_host   = '192.168.2.13';
+$db_host   = 'my-db.ckzsari5voi4.us-east-1.rds.amazonaws.com';
 $db_name   = 'testdb';
 $db_user   = 'admin';
 $db_passwd = 'password123';
