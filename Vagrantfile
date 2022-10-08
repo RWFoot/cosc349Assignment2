@@ -53,7 +53,7 @@ Vagrant.configure("2") do |config|
     # (e.g., ~/.ssh/something).
     # For Windows users, just point to the path where you have downloaded the keypair
     # (e.g., C:\\Users\\<username>\\foo.ppk). (Use double "\\" for folder path)
-    override.ssh.private_key_path = "cosc349assignment-2022.pem"
+    override.ssh.private_key_path = "D:Study\\2022\\Semester2\\cosc349\\lab\\lab09-vagrant-aws-master\\lab09-vagrant-aws-master\\cosc349assignment-2022.pem"
     #~:\\D:Study\\2022\\Semester2\\cosc349\\lab\\lab09-vagrant-aws-master\\lab09-vagrant-aws-master\\
     
     # Choose your Amazon EC2 instance type (t2.micro is cheap).
